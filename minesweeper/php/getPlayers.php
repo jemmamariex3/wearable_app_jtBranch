@@ -61,7 +61,8 @@
     {
       //output data of each row
       for($i = 1; $row = $result->fetch_assoc(); $i++)
-        $array[] = "ID: " . $row["id"] . " - Data: " . $row["data"] . " - Time " . $row["time"]. "<br>";
+        // $array[] = "ID: " . $row["id"] . " - Data: " . $row["data"] . " - Time " . $row["time"]. "<br>";
+        $array[] = $row["id"] . "," . $row["data"] . "," . $row["time"];
     }
     else
       echo "0 results " . $conn->error;
