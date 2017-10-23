@@ -1,6 +1,6 @@
 var buttonFlag = 0;
 
-$(document).ready(function() 
+$(document).ready(function()
 {
  $(window).load(function()
  {
@@ -9,217 +9,221 @@ $(document).ready(function()
 ######## BUTTON LISTENERS  ###########
 ####################################*/
 
-	$("#playTurn").click(function()
-	{
-		window.location.href = '/minesweeper/index_turn.php';
-	});
+    $("#charts").click(function() {
+        window.location.href = '/charts.php';
+    });
 
-	$("#play_p1_vs_p2").click(function()
-	{
-		window.location.href = '/minesweeper/index_p1_vs_p2.php';
-	});
+    $("#playTurn").click(function()
+    {
+        window.location.href = '/minesweeper/index_turn.php';
+    });
 
-	$("#play_p3_vs_p4").click(function()
-	{
-		window.location.href = '/minesweeper/index_p3_vs_p4.php';
-	});
+    $("#play_p1_vs_p2").click(function()
+    {
+        window.location.href = '/minesweeper/index_p1_vs_p2.php';
+    });
 
-	$("#play_p1_vs_p2_turn").click(function()
-	{
-		window.location.href = '/minesweeper/index_p1_vs_p2_turn.php';
-	});
+    $("#play_p3_vs_p4").click(function()
+    {
+        window.location.href = '/minesweeper/index_p3_vs_p4.php';
+    });
 
-	$("#play_p3_vs_p4_turn").click(function()
-	{
-		window.location.href = '/minesweeper/index_p3_vs_p4_turn.php';
-	});
+    $("#play_p1_vs_p2_turn").click(function()
+    {
+        window.location.href = '/minesweeper/index_p1_vs_p2_turn.php';
+    });
 
-	$("#singlePlayer").click(function()
-	{
-		window.location.href = 'http://context-aware.sandbox.csun.edu/~sg938410/ms_kaplan/chooseplayerblind.php';
-	});
+    $("#play_p3_vs_p4_turn").click(function()
+    {
+        window.location.href = '/minesweeper/index_p3_vs_p4_turn.php';
+    });
 
-	$("#heartButton").click(function()
-	{
-		if(buttonFlag == 1)
-		{
-			$("#errorMsg").html("Please Stop Live Script");
-		}
-		else
-		{
-			fetchAllHRData();
-		}
-		
-	});
+    $("#singlePlayer").click(function()
+    {
+        window.location.href = 'http://context-aware.sandbox.csun.edu/~sg938410/ms_kaplan/chooseplayerblind.php';
+    });
 
-	$("#skinButton").click(function()
-	{
-		if(buttonFlag == 1)
-		{
-			$("#errorMsg").html("Please Stop Live Script");
-		}
-		else
-		{
-			fetchAllSkinData();
-		}
-	});
-	
-	$("#stressButton").click(function()
-	{
-		if(buttonFlag == 1)
-		{
-			$("#errorMsg").html("Please Stop Live Script");
-		}
-		else
-		{
-			fetchAllGSRData();
-		}
-	});
-	
-	$("#hideButton").click(function()
-	{
-		if(buttonFlag == 1)
-		{
-			$("#errorMsg").html("Please Stop Live Script");
-		}
-		else
-		{
-			document.getElementById("results").innerHTML = null;
-			//$("#results").empty();		
-		}
-	});
-	
-	$("#liveScriptButton").click(function()
-	{
-		$("#results").empty();
-		buttonFlag = 1;
-		document.getElementById('playerHeader1').style.visibility = 'visible';
-		document.getElementById('playerHeader2').style.visibility = 'visible';
-		document.getElementById('playerHeader3').style.visibility = 'visible';
-		document.getElementById('playerHeader4').style.visibility = 'visible';
-		heartRateFunction();
-		skinTempFunction();
-		gsrRateFunction();
-	});
+    $("#heartButton").click(function()
+    {
+        if(buttonFlag == 1)
+        {
+            $("#errorMsg").html("Please Stop Live Script");
+        }
+        else
+        {
+            fetchAllHRData();
+        }
 
-	$("#stopScriptButton").click(function () {
-	    location.reload();
-	});
+    });
 
-	$("#playbackButton").click(function () {
-	    window.location.href = '/minesweeper/php/playerGsrPlayback.php';
-	});
+    $("#skinButton").click(function()
+    {
+        if(buttonFlag == 1)
+        {
+            $("#errorMsg").html("Please Stop Live Script");
+        }
+        else
+        {
+            fetchAllSkinData();
+        }
+    });
+
+    $("#stressButton").click(function()
+    {
+        if(buttonFlag == 1)
+        {
+            $("#errorMsg").html("Please Stop Live Script");
+        }
+        else
+        {
+            fetchAllGSRData();
+        }
+    });
+
+    $("#hideButton").click(function()
+    {
+        if(buttonFlag == 1)
+        {
+            $("#errorMsg").html("Please Stop Live Script");
+        }
+        else
+        {
+            document.getElementById("results").innerHTML = null;
+            //$("#results").empty();
+        }
+    });
+
+    $("#liveScriptButton").click(function()
+    {
+        $("#results").empty();
+        buttonFlag = 1;
+        document.getElementById('playerHeader1').style.visibility = 'visible';
+        document.getElementById('playerHeader2').style.visibility = 'visible';
+        document.getElementById('playerHeader3').style.visibility = 'visible';
+        document.getElementById('playerHeader4').style.visibility = 'visible';
+        heartRateFunction();
+        skinTempFunction();
+        gsrRateFunction();
+    });
+
+    $("#stopScriptButton").click(function () {
+        location.reload();
+    });
+
+    $("#playbackButton").click(function () {
+        window.location.href = '/minesweeper/php/playerGsrPlayback.php';
+    });
 
 /*####################################
 ####### LIVE SCRIPT FUNCTIONS ########
 ####################################*/
-	
-	function heartRateFunction()
-	{
 
-		fetchPlayerHR(1,2);		
+    function heartRateFunction()
+    {
 
-		fetchPlayerHR(2,5);		
-		
-		fetchPlayerHR(3,8);		
+        fetchPlayerHR(1,2);
 
-		fetchPlayerHR(4,11);		
+        fetchPlayerHR(2,5);
 
-		window.setTimeout(function() {heartRateFunction()}, 500)
-	}
-	
-	function skinTempFunction()
-	{
-		fetchPlayerSkin(1,3);
+        fetchPlayerHR(3,8);
 
-		fetchPlayerSkin(2,6);
+        fetchPlayerHR(4,11);
 
-		fetchPlayerSkin(3,9);
+        window.setTimeout(function() {heartRateFunction()}, 500)
+    }
 
-		fetchPlayerSkin(4,12);
+    function skinTempFunction()
+    {
+        fetchPlayerSkin(1,3);
 
-		window.setTimeout(function() {skinTempFunction()}, 5000)
-	}
+        fetchPlayerSkin(2,6);
 
-	function gsrRateFunction()
-	{
-		fetchPlayerGSR(1,4);
-		
-		fetchPlayerGSR(2,7);		
+        fetchPlayerSkin(3,9);
 
-		fetchPlayerGSR(3,10);
+        fetchPlayerSkin(4,12);
 
-		fetchPlayerGSR(4,13);		
+        window.setTimeout(function() {skinTempFunction()}, 5000)
+    }
 
-		window.setTimeout(function() {gsrRateFunction()}, 200)
-	}
+    function gsrRateFunction()
+    {
+        fetchPlayerGSR(1,4);
+
+        fetchPlayerGSR(2,7);
+
+        fetchPlayerGSR(3,10);
+
+        fetchPlayerGSR(4,13);
+
+        window.setTimeout(function() {gsrRateFunction()}, 200)
+    }
 
 /*###############################################
 ########### FETCH ALL DATA FUNCTIONS ############
 #################################################*/
 
-	function fetchAllHRData()
-	{
-	  var playerHR = document.getElementById('results');
-       
-	  $.ajax({url: "/php/getPlayers.php?func=allHR", 
-		  success: function(result) {
-			  playerHR.innerHTML = result.join("");
-		  }  } );
-	}
+    function fetchAllHRData()
+    {
+      var playerHR = document.getElementById('results');
 
-	function fetchAllSkinData()
-	{
-	  var playerSkin = document.getElementById('results');
-       
-	  $.ajax({url: "/php/getPlayers.php?func=allSkin", 
-		  success: function(result) {
-			  playerSkin.innerHTML = result.join("");
-		  }  } );
-	}
+      $.ajax({url: "/php/getPlayers.php?func=allHR",
+          success: function(result) {
+              playerHR.innerHTML = result.join("");
+          }  } );
+    }
 
-	function fetchAllGSRData()
-	{
-	  var playerGSR = document.getElementById('results');
-       
-	  $.ajax({url: "/php/getPlayers.php?func=allGSR", 
-		  success: function(result) {
-			  playerGSR.innerHTML = result.join("");
-		  }  } );
-	}
+    function fetchAllSkinData()
+    {
+      var playerSkin = document.getElementById('results');
+
+      $.ajax({url: "/php/getPlayers.php?func=allSkin",
+          success: function(result) {
+              playerSkin.innerHTML = result.join("");
+          }  } );
+    }
+
+    function fetchAllGSRData()
+    {
+      var playerGSR = document.getElementById('results');
+
+      $.ajax({url: "/php/getPlayers.php?func=allGSR",
+          success: function(result) {
+              playerGSR.innerHTML = result.join("");
+          }  } );
+    }
 
 /*###################################################
 ########### FETCH EACH PLAYER FUNCTIONS  ############
 ###################################################*/
 
-	function fetchPlayerHR(p, resultsID)
-	{
-	  var playerHR = document.getElementById('results' + resultsID);
-       
-	  $.ajax({url: "/php/getPlayers.php?func=hr&player=" + p, 
-		  success: function(result) {
-			  playerHR.innerHTML = "-Heart Rate: " + result;
-		  }  } );
-	}
+    function fetchPlayerHR(p, resultsID)
+    {
+      var playerHR = document.getElementById('results' + resultsID);
 
-	function fetchPlayerSkin(p, resultsID)
-	{
-	  var playerSkin = document.getElementById('results' + resultsID);
-       
-	  $.ajax({url: "/php/getPlayers.php?func=skintemp&player=" + p, 
-		  success: function(result) {
-			  playerSkin.innerHTML = "-Skin Temp: " + result;
-		  }  } );
-	}
+      $.ajax({url: "/php/getPlayers.php?func=hr&player=" + p,
+          success: function(result) {
+              playerHR.innerHTML = "-Heart Rate: " + result;
+          }  } );
+    }
 
-	function fetchPlayerGSR(p, resultsID)
-	{
-	  var playerGSR = document.getElementById('results' + resultsID);
-       
-	  $.ajax({url: "/php/getPlayers.php?func=gsr&player=" + p, 
-		  success: function(result) {
-			  playerGSR.innerHTML = "-GSR: " + result;
-		  }  } );
-	}
+    function fetchPlayerSkin(p, resultsID)
+    {
+      var playerSkin = document.getElementById('results' + resultsID);
+
+      $.ajax({url: "/php/getPlayers.php?func=skintemp&player=" + p,
+          success: function(result) {
+              playerSkin.innerHTML = "-Skin Temp: " + result;
+          }  } );
+    }
+
+    function fetchPlayerGSR(p, resultsID)
+    {
+      var playerGSR = document.getElementById('results' + resultsID);
+
+      $.ajax({url: "/php/getPlayers.php?func=gsr&player=" + p,
+          success: function(result) {
+              playerGSR.innerHTML = "-GSR: " + result;
+          }  } );
+    }
  });
 });

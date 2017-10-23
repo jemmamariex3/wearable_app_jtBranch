@@ -69,6 +69,15 @@
     return $array;
   }
 
+  function getAllGSRByTime($start, $end)
+  {
+    global $conn;
+    $sql = "SELECT * FROM `gsr_rate_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
+  }
+
 //###############################################
 //### GET LATEST AND ALL HEART RATE FUNCTIONS ###
 //###############################################
@@ -107,6 +116,15 @@
 
     $result->close();
     return $array;
+  }
+
+  function getAllHRByTime($start, $end)
+  {
+    global $conn;
+    $sql = "SELECT * FROM `heart_rate_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
   }
 
 //##############################################
@@ -152,6 +170,15 @@
 
     $result->close();
     return $array;
+  }
+
+  function getAllSkinByTime($start, $end)
+  {
+    global $conn;
+    $sql = "SELECT * FROM `skin_temp_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
   }
 
   function getPlayerAddresses()
@@ -222,8 +249,10 @@
   connect(); // to DB
 
 
-  $func    = isset($_REQUEST['func']) ? mysqli_real_escape_string($conn, $_REQUEST['func']) : "";
-  $player  = isset($_REQUEST['player']) ? mysqli_real_escape_string($conn, $_REQUEST['player']) : 0;
+  $func = isset($_REQUEST['func']) ? mysqli_real_escape_string($conn, $_REQUEST['func']) : "";
+  $player = isset($_REQUEST['player']) ? mysqli_real_escape_string($conn, $_REQUEST['player']) : 0;
+  $start = isset($_REQUEST['start']) ? mysqli_real_escape_string($conn, $_REQUEST['start']) : 0;
+  $end = isset($_REQUEST['end']) ? mysqli_real_escape_string($conn, $_REQUEST['end']) : 0;
 
   error_log("func is $func and player is $players");
 
@@ -246,6 +275,12 @@
       $response = getAllSkinForPlayers(); break;
     case 'allGSR' :
       $response = getAllGSRForPlayers(); break;
+    case 'allHRTime':
+      $response = getAllHRByTime($start, $end); break;
+    case 'allGSRTime':
+      $response = getAllGSRByTime($start, $end); break;
+    case 'allSkinTime':
+      $response = getAllSkinByTime($start, $end); break;
     case 'getPlayers' :
       $response = getPlayerAddresses(); break;
     case 'getMyIp' :
