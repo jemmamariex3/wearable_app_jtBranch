@@ -108,6 +108,21 @@
     return $insertResponse;
   }
 
+  function insertLatestBA($player,$data,$time)
+  {
+    global $conn;
+
+    $sql = "INSERT INTO breath_amp_table (id, data, time) VALUES ($player, $data, $time)";
+
+      if($conn->query($sql) === TRUE)
+        $insertResponse = "player: " . $player . " breath amplitude: " . $data . " inserted.";
+      else
+        $insertResponse = "player: " . $player . " breath amplitude failed to insert.";
+
+    $conn->close();
+    return $insertResponse;
+  }
+
   function insertRemoteAddress($time, $ipaddress)
   {
     global $conn;
@@ -183,6 +198,8 @@
       $response = insertLatestAL($player,$data,$time); break;
     case 'ac' :
       $response = insertLatestAC($player, $dataX, $dataY, $dataZ, $time); break;
+    case 'ba' :
+      $response = insertLatestBA($player,$data,$time); break;
     case 'insertIp' :
       $response = insertRemoteAddress($time, $ipaddress); break;
     case 'removeIp' :

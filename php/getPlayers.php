@@ -69,6 +69,15 @@
     return $array;
   }
 
+  function getAllGSRByTime($start, $end)
+  {
+    global $conn;
+    $sql = "SELECT * FROM `gsr_rate_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
+  }
+
 //###############################################
 //### GET LATEST AND ALL HEART RATE FUNCTIONS ###
 //###############################################
@@ -107,6 +116,15 @@
 
     $result->close();
     return $array;
+  }
+
+  function getAllHRByTime($start, $end)
+  {
+    global $conn;
+    $sql = "SELECT * FROM `heart_rate_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
   }
 
 //##############################################
@@ -154,6 +172,120 @@
     return $array;
   }
 
+  function getAllSkinByTime($start, $end)
+  {
+    global $conn;
+    $sql = "SELECT * FROM `skin_temp_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
+  }
+
+  //##################################################
+  //### GET LATEST AND ALL ACCELEROMETER FUNCTIONS ###
+  //##################################################
+
+  function getLatestACForPlayer($player)
+  {
+    global $conn;
+    $ac = -1;
+    $stmt = $conn->prepare("SELECT dataX, dataY, dataZ, time FROM accelerometer_table WHERE ID = ? ORDER BY time DESC LIMIT 1");
+    $stmt->bind_param('i', $player);
+    if($stmt->execute()) {
+      $stmt->bind_result($dataX, $dataY, $dataZ, $time);
+      while($row = $stmt->fetch())
+      {
+        $ac = "X: " . $dataX . " Y: " . $dataY . " Z: " . $dataZ;
+      }
+    }
+    $stmt->close();
+
+    return $ac;
+
+  }
+
+  function getAllACByTime($start, $end) {
+    global $conn;
+    $sql = "SELECT * FROM `accelerometer_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
+  }
+
+  //#####################################################
+  //### GET LATEST AND ALL BREATH AMPLITUDE FUNCTIONS ###
+  //#####################################################
+
+  function getLatestBAForPlayer($player)
+  {
+    global $conn;
+    $ba = -1;
+    $stmt = $conn->prepare("SELECT data, time FROM breath_amp_table WHERE ID = ? ORDER BY time DESC LIMIT 1");
+    $stmt->bind_param('i', $player);
+    if($stmt->execute()) {
+      $stmt->bind_result($data, $time);
+      while($row = $stmt->fetch())
+      {
+        $ba = $data;
+      }
+    }
+    $stmt->close();
+    return $ba;
+  }
+
+  function getAllBAForPlayers()
+  {
+    global $conn;
+    $sql = "SELECT id, data, time FROM breath_amp_table ORDER BY time DESC";
+    $result = $conn->query($sql);
+    $array = array();
+    if ($result->num_rows > 0)
+    {
+      for($i = 1; $row = $result->fetch_assoc(); $i++)
+        $array[] = "ID: " . $row["id"] . " - Data: " . $row["data"] . " - Time " . $row["time"]. "<br>";
+    }
+    else
+      echo "0 results " . $conn->error;
+
+    $result->close();
+    return $array;
+  }
+
+  function getAllBAByTime($start, $end)
+  {
+    global $conn;
+    $sql = "SELECT * FROM `breath_amp_table` WHERE `time` BETWEEN '$start' AND '$end'
+      ORDER BY `id` ASC, `time` ASC";
+    $result = $conn->query($sql);
+    return $result->fetch_all();
+  }
+
+  //##################################################
+  //### GET  ALL AMBIENT LIGHT FUNCTIONS ###
+  //##################################################
+
+    function getLatestALForPlayer($player)
+  {
+    global $conn;
+    $al = -1;
+    $stmt = $conn->prepare("SELECT data, time FROM ambient_light_table WHERE ID = ? ORDER BY time DESC LIMIT 1");
+    $stmt->bind_param('i', $player);
+    if($stmt->execute()) {
+      $stmt->bind_result($data, $time);
+      while($row = $stmt->fetch())
+      {
+        $al = $data;
+      }
+    }
+    $stmt->close();
+
+    return $al;
+  }
+
+  //##################################################
+  //### OTHER FUNCTIONS ###
+  //##################################################
+
   function getPlayerAddresses()
   {
     global $conn;
@@ -180,50 +312,15 @@
     return $myIp;
   }
 
-  function getLatestALForPlayer($player)
-  {
-    global $conn;
-    $al = -1;
-    $stmt = $conn->prepare("SELECT data, time FROM ambient_light_table WHERE ID = ? ORDER BY time DESC LIMIT 1");
-    $stmt->bind_param('i', $player);
-    if($stmt->execute()) {
-      $stmt->bind_result($data, $time);
-      while($row = $stmt->fetch())
-      {
-        $al = $data;
-      }
-    }
-    $stmt->close();
-
-    return $al;
-  }
-
-  function getLatestACForPlayer($player)
-  {
-    global $conn;
-    $ac = -1;
-    $stmt = $conn->prepare("SELECT dataX, dataY, dataZ, time FROM accelerometer_table WHERE ID = ? ORDER BY time DESC LIMIT 1");
-    $stmt->bind_param('i', $player);
-    if($stmt->execute()) {
-      $stmt->bind_result($dataX, $dataY, $dataZ, $time);
-      while($row = $stmt->fetch())
-      {
-        $ac = "X: " . $dataX . " Y: " . $dataY . " Z: " . $dataZ;
-      }
-    }
-    $stmt->close();
-
-    return $ac;
-
-  }
-
 //######### MAIN code of web service#########
 
   connect(); // to DB
 
 
-  $func    = isset($_REQUEST['func']) ? mysqli_real_escape_string($conn, $_REQUEST['func']) : "";
-  $player  = isset($_REQUEST['player']) ? mysqli_real_escape_string($conn, $_REQUEST['player']) : 0;
+  $func = isset($_REQUEST['func']) ? mysqli_real_escape_string($conn, $_REQUEST['func']) : "";
+  $player = isset($_REQUEST['player']) ? mysqli_real_escape_string($conn, $_REQUEST['player']) : 0;
+  $start = isset($_REQUEST['start']) ? mysqli_real_escape_string($conn, $_REQUEST['start']) : 0;
+  $end = isset($_REQUEST['end']) ? mysqli_real_escape_string($conn, $_REQUEST['end']) : 0;
 
   error_log("func is $func and player is $players");
 
@@ -240,12 +337,26 @@
       $response = getLatestALForplayer($player); break;
     case 'ac' :
       $response = getLatestACForplayer($player); break;
+    case 'ba' :
+      $response = getLatestBAForplayer($player); break;
     case 'allHR' :
       $response = getAllHRForPlayers(); break;
     case 'allSkin' :
       $response = getAllSkinForPlayers(); break;
     case 'allGSR' :
       $response = getAllGSRForPlayers(); break;
+    case 'allBA' :
+      $response = getAllBAForPlayers(); break;
+    case 'allHRTime':
+      $response = getAllHRByTime($start, $end); break;
+    case 'allGSRTime':
+      $response = getAllGSRByTime($start, $end); break;
+    case 'allSkinTime':
+      $response = getAllSkinByTime($start, $end); break;
+    case 'allACTime':
+      $response = getAllACByTime($start, $end); break;
+    case 'allBATime':
+      $response = getAllBAByTime($start, $end); break;
     case 'getPlayers' :
       $response = getPlayerAddresses(); break;
     case 'getMyIp' :

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-	//session_destroy();
+    //session_destroy();
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,6 +15,7 @@
 
     <!--Scripts-->
     <script src="scripts/jquery.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="scripts/getResultsScript.js"></script>
 
     <title>Wearables</title>
@@ -22,10 +23,11 @@
 </head>
 
 <body>
-	<div id="wrapper">
-    	<h1 align="center"> Wearables </h1><hr />
+    <div id="wrapper">
+        <h1 align="center"> Wearables </h1><hr />
 
         <div id="buttonsDiv">
+            <button id="charts" class="buttonDesign">D3 Charts</button>
             <button id="gameTimer" class="buttonDesign">Game Timer</button>
             <button id="singlePlayer" class="buttonDesign">Single Player</button>
             <button id="playTurn" class="buttonDesign">Minesweeper 4-Player Turn</button>
@@ -41,17 +43,17 @@
             <button id="stopScriptButton" class="buttonDesign">Stop Live Script</button>
             <button id="playbackButton" class="buttonDesign">Player GSR Playback</button>
             <p style="color: #FFF; text-align: center; background-color: black;">Error Messages:</p>
-	    <p id ="errorMsg" style="color: red; background-color: black; text-align: center;"></p>
+        <p id ="errorMsg" style="color: red; background-color: black; text-align: center;"></p>
         </div>
 
         <div id="results">
 
         </div>
 
-		</br></br>
+        </br></br>
 
-		<div id = "player1">
-        	<span id="playerHeader1"><h3>Player 1</h3></span>
+        <div id = "player1">
+            <span id="playerHeader1"><h3>Player 1</h3></span>
             <span id="results2">
 
             </span>
@@ -68,7 +70,7 @@
         </br></br>
 
         <div id = "player2">
-        	<span id="playerHeader2"><h3>Player 2</h3></span>
+            <span id="playerHeader2"><h3>Player 2</h3></span>
             <span id="results5">
 
             </span>
@@ -85,7 +87,7 @@
         </br></br>
 
         <div id = "player3">
-        	<span id="playerHeader3"><h3>Player 3</h3></span>
+            <span id="playerHeader3"><h3>Player 3</h3></span>
 
             <span id="results8">
 
@@ -103,7 +105,7 @@
         </br></br>
 
         <div id = "player4">
-	    <span id="playerHeader4"><h3>Player 4</h3></span>
+        <span id="playerHeader4"><h3>Player 4</h3></span>
 
             <span id="results11">
 
