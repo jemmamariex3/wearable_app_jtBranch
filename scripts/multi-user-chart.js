@@ -10,6 +10,7 @@ function buildMultiUserChart(display, start, end, data) {
     var w = parseInt(d3.select('#chart-container').style('width')) - 2 * m.left;
     var h = 600 - m.top - m.bottom;
 
+    // TODO: Modify to work with multiple live charts
     var chart = d3.select("#chart")
         .attr("width", w + m.left + m.right)
         .attr("height", h + m.top + m.bottom)
@@ -18,6 +19,9 @@ function buildMultiUserChart(display, start, end, data) {
 
     var minTime = start;
     var maxTime = end;
+
+    // Choose which chart to display for charts.php
+    data = data[display];
 
     var minData = Number.POSITIVE_INFINITY;
     var maxData = Number.NEGATIVE_INFINITY;
