@@ -22,7 +22,14 @@
 
 <body>
     <div id="nav">
-        <button id="home"class="button-primary"><a href="/index.php">Home</a></button>
+        <button id="home" class="button-primary"><a href="/index.php">Home</a></button>
+    </div>
+
+    <div class="container">
+        <div id="live-buttons">
+            <button id="start"class="button">Start</button>
+            <button id="stop"class="button" style="display:none">Stop</button>
+        </div>
     </div>
   
     <div id="chart-container">

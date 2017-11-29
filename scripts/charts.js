@@ -13,20 +13,20 @@ var games = {
     s2g5: [1489792020000, 1489792440000]
 };
 
-function getAllDataByTime(display, start, end, cb) {
+function getAllDataByTime(live, display, start, end, cb) {
     var hr, gsr, skin, ac, ba;
 
-    wearables.getGSRByTime(start, end, function(data) {
+    wearables.getGSRByTime(start, end, function (data) {
         gsr = data;
-        wearables.getHeartRateByTime(start, end, function(data) {
+        wearables.getHeartRateByTime(start, end, function (data) {
             hr = data;
-            wearables.getSkinByTime(start, end, function(data) {
+            wearables.getSkinByTime(start, end, function (data) {
                 skin = data;
-                wearables.getACByTime(start, end, function(data) {
+                wearables.getACByTime(start, end, function (data) {
                     ac = acTransform(data);
-                    wearables.getBAByTime(start, end, function(data) {
+                    wearables.getBAByTime(start, end, function (data) {
                         ba = data;
-                        return cb(display, start, end,
+                        return cb(live, display, start, end,
                             {
                                 heartRate: hr,
                                 gsr: gsr,
@@ -90,6 +90,7 @@ $(function() {
     // display: gsr, ac, hr, skin or player1, player2, player3, player4
     var type, display;
     var custom = false;
+    var live = false;
 
     // Multi-User OnClicks --------------------------------------------
     $("#chart-select").find("#multi-user").on('click', function() {
@@ -230,9 +231,9 @@ $(function() {
         // Build chart
         switch(type) {
             case "user": 
-                getAllDataByTime(display, start, end, buildMultiUserChart); break;
+                getAllDataByTime(live, display, start, end, buildMultiUserChart); break;
             case "signal":
-                getAllDataByTime(display, start, end, buildMultiSignalChart); break;
+                getAllDataByTime(live, display, start, end, buildMultiSignalChart); break;
         }
     });
 });
