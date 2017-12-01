@@ -13,7 +13,7 @@ var games = {
     s2g5: [1489792020000, 1489792440000]
 };
 
-function getAllDataByTime(live, display, start, end, cb) {
+function getAllDataByTime(display, start, end, cb) {
     var hr, gsr, skin, ac, ba;
 
     wearables.getGSRByTime(start, end, function (data) {
@@ -26,7 +26,7 @@ function getAllDataByTime(live, display, start, end, cb) {
                     ac = acTransform(data);
                     wearables.getBAByTime(start, end, function (data) {
                         ba = data;
-                        return cb(live, display, start, end,
+                        return cb(display, start, end,
                             {
                                 heartRate: hr,
                                 gsr: gsr,
@@ -231,9 +231,9 @@ $(function() {
         // Build chart
         switch(type) {
             case "user": 
-                getAllDataByTime(live, display, start, end, buildMultiUserChart); break;
+                getAllDataByTime(display, start, end, buildMultiUserChart); break;
             case "signal":
-                getAllDataByTime(live, display, start, end, buildMultiSignalChart); break;
+                getAllDataByTime(display, start, end, buildMultiSignalChart); break;
         }
     });
 });

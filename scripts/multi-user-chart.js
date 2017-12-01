@@ -115,16 +115,17 @@ function buildMultiUserChart(type, start, end, data) {
 }
 
 function buildLiveMultiUserChart () {
-    var m = { left: 30, right: 0, top: 5, bottom: 30 },
+    var m = { left: 30, right: 0, top: 10, bottom: 30 },
         w = parseInt(d3.select('#chart-container').style('width')) - 2 * m.left,
         h = 600 - m.top - m.bottom;
 
     var chart = d3.select("#ba-chart")
         .attr("width", w + m.left + m.right)
         .attr("height", h + m.top + m.bottom)
-        .attr("transform", "translate(" + m.left + "," + m.top + ")");
+        .attr("transform", "translate(" + m.left + ",0)");
 
-    var latestHR, latestGSR, latestSkin, latestAL, latestAC, latestBA, data = [];
+    var latestBA, data = [];
+    var max = 0;
 
     var limit = 60 * 1,
         duration = 750,
@@ -136,10 +137,10 @@ function buildLiveMultiUserChart () {
     // Set axes
     var x = d3.scaleTime()
         .domain([now - (limit - 2), now - duration])
-        .range([0, w]),
+        .range([(-m.left - m.right), w - m.left - m.right]),
         y = d3.scaleLinear()
-        .domain([0, h])
-        .range([h - m.bottom - m.top - 30, 0]);
+        .domain([0, max])
+        .range([h - m.bottom, 0]);
 
     // Set lines
     var line = d3.line()
@@ -153,15 +154,13 @@ function buildLiveMultiUserChart () {
     var xAxis = d3.axisBottom().scale(x),
         axisX = chart.append('g')
         .attr('class', 'x axis')
-        .attr('transform', 'translate(0, 500)')
+        .attr('transform', 'translate(' + (m.left + m.right) + ', ' + (h - m.top - m.bottom + 10) + ')')
         .call(xAxis);
     var yAxis = d3.axisLeft().scale(y),
         axisY = chart.append('g')
         .attr('class', 'y axis')
-        .attr('transform', 'translate(20,0)')
+        .attr('transform', 'translate(20,' + 0 + ')')
         .call(yAxis);
-    
-    var max = 0;
 
     function tick() {
         now = new Date();
@@ -183,6 +182,10 @@ function buildLiveMultiUserChart () {
             .duration(duration)
             .ease(d3.easeLinear, 2)
             .call(xAxis);
+        axisY.transition()
+            .duration(duration)
+            .ease(d3.easeLinear, 2)
+            .call(yAxis);
         path.attr('transform', null)
             .transition()
             .duration(duration)
