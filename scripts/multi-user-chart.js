@@ -115,48 +115,53 @@ function buildMultiUserChart(type, start, end, data) {
 }
 
 function buildLiveMultiUserChart () {
-    var m = { left: 30, right: 0, top: 5, bottom: 30 };
-    var w = parseInt(d3.select('#chart-container').style('width')) - 2 * m.left;
-    var h = 600 - m.top - m.bottom;
+    var m = { left: 30, right: 0, top: 5, bottom: 30 },
+        w = parseInt(d3.select('#chart-container').style('width')) - 2 * m.left,
+        h = 600 - m.top - m.bottom;
 
     var chart = d3.select("#ba-chart")
         .attr("width", w + m.left + m.right)
         .attr("height", h + m.top + m.bottom)
         .attr("transform", "translate(" + m.left + "," + m.top + ")");
 
-    var latestHR, latestGSR, latestSkin, latestAL, latestAC, latestBA;
-    var data = [];
+    var latestHR, latestGSR, latestSkin, latestAL, latestAC, latestBA, data = [];
 
     var limit = 60 * 1,
-        duration = 750;
+        duration = 750,
         // now = new Date(Date.now() - duration);
-    
-    var now = new Date();
+        now = new Date();
+
     now = new Date(now.getTime() - 10000);
 
     // Set axes
     var x = d3.scaleTime()
         .domain([now - (limit - 2), now - duration])
-        .range([0, w])
-    var y = d3.scaleLinear()
-        .domain([0, h]) // TODO: dynamically set max?
+        .range([0, w]),
+        y = d3.scaleLinear()
+        .domain([0, h])
         .range([h - m.bottom - m.top - 30, 0]);
 
     // Set lines
     var line = d3.line()
         .x(function (d, i) { return x(now - (limit - 1 - i) * duration); })
-        .y(function (d) { return y(d); });
+        .y(function (d) { return y(d); }),
+        path = chart.append('path');
     var player1 = d3.line().curve(d3.curveCardinal)
         .x(function (d) { return x(d.x); })
         .y(function (d) { return y(d.y); });
 
-    var xAxis = d3.axisBottom().scale(x);
-    var axisX = chart.append('g').attr('class', 'x axis')
+    var xAxis = d3.axisBottom().scale(x),
+        axisX = chart.append('g')
+        .attr('class', 'x axis')
         .attr('transform', 'translate(0, 500)')
         .call(xAxis);
-    // var yAxis = d3.axisLeft(y);
-
-    var path = chart.append('path');
+    var yAxis = d3.axisLeft().scale(y),
+        axisY = chart.append('g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate(20,0)')
+        .call(yAxis);
+    
+    var max = 0;
 
     function tick() {
         now = new Date();
@@ -169,8 +174,11 @@ function buildLiveMultiUserChart () {
         data.push(point);
         path.datum(data).attr('d', player1);
 
+        if(latestBA > max) { max = latestBA };
+
         // Shift the chart left
         x.domain([now - (limit - 2) * duration, now - duration]);
+        y.domain([0, max]);
         axisX.transition()
             .duration(duration)
             .ease(d3.easeLinear, 2)
