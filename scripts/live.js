@@ -1,4 +1,5 @@
-function getAllDataByTime(live, display, start, end, cb) {
+// TODO: Refactor Duplicate Code ----------------------------------------------
+function getAllDataByTime(display, start, end, cb) {
     var hr, gsr, skin, ac, ba;
 
     wearables.getGSRByTime(start, end, function (data) {
@@ -11,7 +12,7 @@ function getAllDataByTime(live, display, start, end, cb) {
                     ac = acTransform(data);
                     wearables.getBAByTime(start, end, function (data) {
                         ba = data;
-                        return cb(live, display, start, end,
+                        return cb(display, start, end,
                             {
                                 heartRate: hr,
                                 gsr: gsr,
@@ -68,15 +69,14 @@ function convertTime(startDate, endDate) {
 
     return time;
 }
-// TODO: All of above is duplicate code from charts.js
+// DUPLICATE ------------------------------------------------------
 
 $(function () {
     var live, display, start, end;
-    display = "all";
 
     // listen for start/stop button to get start and end times
     $("#live-buttons").find("#start").on('click', function () {
-        start = new Date();
+        start = new Date(); // keep for later
         live = true;
         $('#stop').show();
         // convert it to unix time stamp in milliseconds
@@ -84,9 +84,10 @@ $(function () {
         start = filteredTime.start;
 
         // Build live charts
-        getAllDataByTime(live, display, start, end, buildMultiUserChart);
-        getAllDataByTime(live, display, start, end, buildMultiSignalChart);
+        buildLiveMultiUserChart();
+        buildLiveMultiSignalChart();
     });
+    
     $("#live-buttons").find("#start").on('click', function () {
         end = new Date();
         live = false;
@@ -96,7 +97,7 @@ $(function () {
         end = filteredTime.end;
         
         // regenerate charts with non-live values
-        getAllDataByTime(live, display, start, end, buildMultiUserChart);
-        getAllDataByTime(live, display, start, end, buildMultiSignalChart);
+        // getAllDataByTime(display, start, end, buildMultiUserChart);
+        // getAllDataByTime(display, start, end, buildMultiSignalChart);
     });
 });

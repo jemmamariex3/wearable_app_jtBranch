@@ -33,14 +33,20 @@
     </div>
   
     <div id="chart-container">
-        <h5 id="chart-title">Live Multi-User</h3>
-        <svg id="chart"></svg>
-    </div>
-    <div id="chart-container">
+        <h5 id="chart-title">Live Multi-User</h5>
+        <svg id="gsr-chart"></svg>
+        <svg id="hr-chart"></svg>
+        <svg id="skin-chart"></svg>
+        <svg id="ac-chart"></svg>
+        <h5 id="chart-title">Breath Amplitude</h5>
+        <svg id="ba-chart"></svg>
+        <hr>
         <h5 id="chart-title">Live Multi-Signal</h3>
-        <svg id="chart"></svg>
+        <svg id="player1-chart"></svg>
+        <svg id="player2-chart"></svg>
+        <svg id="player3-chart"></svg>
+        <svg id="player4-chart"></svg>
     </div>
-
 </body>
 
 </html>
