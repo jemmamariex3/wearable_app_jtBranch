@@ -42,11 +42,11 @@
       $stmt->bind_result($data, $time);
       while($row = $stmt->fetch())
       {
-        $gsr = $data;
+        $response = $data . "," . $time;
       }
     }
     $stmt->close();
-    return $gsr;
+    return $response;
   }
 
   function getAllGSRForPlayers()
@@ -92,11 +92,11 @@
       $stmt->bind_result($data, $time);
       while($row = $stmt->fetch())
       {
-        $hr = $data;
+        $response = $data . "," . $time;
       }
     }
     $stmt->close();
-    return $hr;
+    return $response;
   }
 
   function getAllHRForPlayers()
@@ -150,7 +150,7 @@
     {
       $temp = $temp * 9 / 5 + 32;
     }
-    return $temp;
+    return $temp . "," . $time;
   }
 
   function getAllSkinForPlayers()
@@ -195,13 +195,12 @@
       $stmt->bind_result($dataX, $dataY, $dataZ, $time);
       while($row = $stmt->fetch())
       {
-        $ac = "X: " . $dataX . " Y: " . $dataY . " Z: " . $dataZ;
+        $response = $dataX . "," . $dataY . "," . $dataZ . "," . $time;
       }
     }
     $stmt->close();
 
-    return $ac;
-
+    return $response;
   }
 
   function getAllACByTime($start, $end) {
@@ -226,11 +225,11 @@
       $stmt->bind_result($data, $time);
       while($row = $stmt->fetch())
       {
-        $ba = $data;
+        $response = $data . "," . $time;
       }
     }
     $stmt->close();
-    return $ba;
+    return $response;
   }
 
   function getAllBAForPlayers()
