@@ -34,12 +34,13 @@
   
     <div id="chart-container">
         <h5 id="chart-title">Live Multi-User</h5>
-        <svg id="gsr-chart"></svg>
+        <!-- <svg id="gsr-chart"></svg>
         <svg id="hr-chart"></svg>
         <svg id="skin-chart"></svg>
-        <svg id="ac-chart"></svg>
+        <svg id="ac-chart"></svg> -->
         <h5 id="chart-title">Breath Amplitude</h5>
-        <svg id="ba-chart"></svg>
+        <!-- <svg id="ba-chart"></svg> -->
+        <svg id="chart"></svg>
         <hr>
         <h5 id="chart-title">Live Multi-Signal</h3>
         <svg id="player1-chart"></svg>

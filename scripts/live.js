@@ -85,19 +85,22 @@ $(function () {
 
         // Build live charts
         buildLiveMultiUserChart();
-        buildLiveMultiSignalChart();
+        // buildLiveMultiSignalChart();
     });
     
-    $("#live-buttons").find("#start").on('click', function () {
+    $("#live-buttons").find("#stop").on('click', function () {
         end = new Date();
         live = false;
 
         // convert it to unix time stamp in milliseconds
         var filteredTime = convertTime(start, end);
         end = filteredTime.end;
+        display = "breathAmp";
         
         // regenerate charts with non-live values
-        // getAllDataByTime(display, start, end, buildMultiUserChart);
+        getAllDataByTime(display, start, end, buildMultiUserChart);
         // getAllDataByTime(display, start, end, buildMultiSignalChart);
+
+        console.log("start: " + start + " end:" + end);
     });
 });

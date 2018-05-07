@@ -39,6 +39,7 @@
                 <button id="skin" class="toggle-select-type">Skin Temperature</button>
                 <button id="ac" class="toggle-select-type">Accelerometer</button>
                 <button id="ba" class="toggle-select-type">Breath Amplitude</button>
+                <button id="csv" class="toggle-select-type">Custom CSV Data</button>
             </div>
             <div class="row" id="multi-signal-select" style="display:none">
                 <button id="player1" class="toggle-select-type">Player 1</button>
@@ -76,9 +77,14 @@
             </div>
             <div class="row" id="customGames" style="display:none">
                 <div class="twelve columns custom">
-                    <!-- TODO Implement a better alternative to type="datetime-local" -->
                     <label>Start: <input class="" id="customStart" type="datetime-local" value="2017-03-17T14:23"></label>
                     <label>End: <input class="" id="customEnd" type="datetime-local" value="2017-03-17T14:25"></label>
+                    <button id="customFilter" class="small-button toggle-select-game">Filter</button>
+                </div>
+                <div class="twelve columns custom">
+                    <!-- TODO: Make timestamp filter work -->
+                    <label>Start: <input class="" id="customStartStamp" type="text" placeholder="1512249646767"></label>
+                    <label>End: <input class="" id="customEndStamp" type="text" placeholder="1512249691855"></label>
                     <button id="customFilter" class="small-button toggle-select-game">Filter</button>
                 </div>
             </div>

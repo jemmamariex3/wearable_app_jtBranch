@@ -133,7 +133,13 @@ $(function() {
         $('.toggle-select-type').removeClass('button button-primary');
         $('#ba').addClass('button button-primary');
     });
-
+    $("#type-select").find("#csv").on('click', function () {
+        display = "customData";
+        $('#chart-container').show();
+        $('.toggle-select-type').removeClass('button button-primary');
+        $('#csv').addClass('button button-primary');
+    });
+    
     // Multi-Signal OnClicks -------------------------------------------
     $("#chart-select").find("#multi-signal").on('click', function() {
         type = "signal";

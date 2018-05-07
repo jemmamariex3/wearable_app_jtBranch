@@ -119,7 +119,8 @@ function buildLiveMultiUserChart () {
         w = parseInt(d3.select('#chart-container').style('width')) - 2 * m.left,
         h = 600 - m.top - m.bottom;
 
-    var chart = d3.select("#ba-chart")
+    // var chart = d3.select("#ba-chart")
+    var chart = d3.select("#chart")
         .attr("width", w + m.left + m.right)
         .attr("height", h + m.top + m.bottom)
         .attr("transform", "translate(" + m.left + ",0)");
@@ -132,7 +133,7 @@ function buildLiveMultiUserChart () {
         // now = new Date(Date.now() - duration);
         now = new Date();
 
-    now = new Date(now.getTime() - 10000);
+    // now = new Date(now.getTime() - 10000);
 
     // Set axes
     var x = d3.scaleTime()
@@ -159,21 +160,25 @@ function buildLiveMultiUserChart () {
     var yAxis = d3.axisLeft().scale(y),
         axisY = chart.append('g')
         .attr('class', 'y axis')
-        .attr('transform', 'translate(20,' + 0 + ')')
+        .attr('transform', 'translate('+ (m.left + 20) + ',' + 0 + ')')
         .call(yAxis);
 
     function tick() {
         now = new Date();
-        now = new Date(now.getTime() - 10000);
+        // now = new Date(now.getTime() - 10000);
 
         // Grab and push new data
         wearables.getLatestBA("1", grabBA);
         function grabBA(data) { latestBA = data; };
+        
+        // TODO: Add multiple players
+
         var point = { x: now, y: latestBA };
         data.push(point);
         path.datum(data).attr('d', player1);
 
         if(latestBA > max) { max = latestBA };
+
 
         // Shift the chart left
         x.domain([now - (limit - 2) * duration, now - duration]);
