@@ -15,56 +15,31 @@ var games = {
 
 function getAllDataByTime(display, start, end, cb) {
     var hr, gsr, skin, ac, ba;
-    switch(display) {
-        case "1":
-        case "2":
-        case "3":
-        case "4":
-            wearables.getGSRByTime(start, end, function(data) {
-                gsr = data;
-                wearables.getHeartRateByTime(start, end, function(data) {
-                    hr = data;
-                    wearables.getSkinByTime(start, end, function(data) {
-                        skin = data;
-                        wearables.getACByTime(start, end, function(data) {
-                            ac = acTransform(data);
-                            wearables.getBAByTime(start, end, function(data) {
-                                ba = data;
-                                return cb(display, start, end,
-                                    {
-                                        heartRate: hr,
-                                        gsr: gsr,
-                                        skin: skin,
-                                        accelerometer: ac,
-                                        breathAmp: ba
-                                    }
-                                );
-                            });
-                        });
+
+    wearables.getGSRByTime(start, end, function (data) {
+        gsr = data;
+        wearables.getHeartRateByTime(start, end, function (data) {
+            hr = data;
+            wearables.getSkinByTime(start, end, function (data) {
+                skin = data;
+                wearables.getACByTime(start, end, function (data) {
+                    ac = acTransform(data);
+                    wearables.getBAByTime(start, end, function (data) {
+                        ba = data;
+                        return cb(display, start, end,
+                            {
+                                heartRate: hr,
+                                gsr: gsr,
+                                skin: skin,
+                                accelerometer: ac,
+                                breathAmp: ba
+                            }
+                        );
                     });
                 });
-            }); break;
-        case "gsr":
-            wearables.getGSRByTime(start, end, function(data) {
-                return cb(display, start, end, data);
-            }); break;
-        case "hr":
-            wearables.getHeartRateByTime(start, end, function(data) {
-                return cb(display, start, end, data);
-            }); break;
-        case "skin":
-            wearables.getSkinByTime(start, end, function(data) {
-                return cb(display, start, end, data);
-            }); break;
-        case "ac":
-            wearables.getACByTime(start, end, function(data) {
-                return cb(display, start, end, acTransform(data));
-            }); break;
-        case "ba":
-            wearables.getBAByTime(start, end, function (data) {
-                return cb(display, start, end, data);
-            }); break;
-    }
+            });
+        });
+    });
 }
 
 // Transform dataX, dataY, dataZ into instantaneous acceleration data
@@ -115,6 +90,7 @@ $(function() {
     // display: gsr, ac, hr, skin or player1, player2, player3, player4
     var type, display;
     var custom = false;
+    var live = false;
 
     // Multi-User OnClicks --------------------------------------------
     $("#chart-select").find("#multi-user").on('click', function() {
@@ -128,7 +104,7 @@ $(function() {
     });
     
     $("#type-select").find("#hr").on('click', function() {
-        display = "hr";
+        display = "heartRate";
         $('#session-select').show();
         $('.toggle-select-type').removeClass('button button-primary');
         $('#hr').addClass('button button-primary');
@@ -146,18 +122,24 @@ $(function() {
         $('#skin').addClass('button button-primary');
     });
     $("#type-select").find("#ac").on('click', function() {
-        display = "ac";
+        display = "accelerometer";
         $('#session-select').show();
         $('.toggle-select-type').removeClass('button button-primary');
         $('#ac').addClass('button button-primary');
     });
     $("#type-select").find("#ba").on('click', function () {
-        display = "ba";
+        display = "breathAmp";
         $('#session-select').show();
         $('.toggle-select-type').removeClass('button button-primary');
         $('#ba').addClass('button button-primary');
     });
-
+    $("#type-select").find("#csv").on('click', function () {
+        display = "customData";
+        $('#chart-container').show();
+        $('.toggle-select-type').removeClass('button button-primary');
+        $('#csv').addClass('button button-primary');
+    });
+    
     // Multi-Signal OnClicks -------------------------------------------
     $("#chart-select").find("#multi-signal").on('click', function() {
         type = "signal";

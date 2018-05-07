@@ -147,38 +147,38 @@ function buildMultiSignalChart(player, start, end, data) {
         .attr("class", "axisOrange")
         .attr("transform", "translate(-25,10)")
         .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("GSR");
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("GSR");
     gYAxisHRLabel = innerSpace.append("svg:g")
         .attr("class", "axisRed")
         .attr("transform", "translate(-75,10)")
         .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("HR");
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("HR");
     gYAxisSkinLabel = innerSpace.append("svg:g")
         .attr("class", "axisGreen")
         .attr("transform", "translate(-125,10)")
         .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("Skin");
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Skin");
     gYAxisACLabel = innerSpace.append("svg:g")
         .attr("class", "axisPurple")
         .attr("transform", "translate(-175,10)")
         .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("Accelerometer");
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Accelerometer");
     gYAxisBALabel = innerSpace.append("svg:g")
         .attr("class", "axisBlue")
         .attr("transform", "translate(-225,10)")
@@ -235,4 +235,15 @@ function buildMultiSignalChart(player, start, end, data) {
         pathAC.attr("transform", d3.event.transform);
         pathBA.attr("transform", d3.event.transform);
     }
+}
+
+function buildLiveMultiSignalChart (start) {
+    // console.log("IN LIVE MULTI SIGNAL");
+    // TODO: d3 select multiple live charts
+
+    // TODO: update end time and max val
+
+    // TODO: draw each time new value is grabbed
+
+    // TODO: No zoom only automatically resize graph on currMaxVal
 }

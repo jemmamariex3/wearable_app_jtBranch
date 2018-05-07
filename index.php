@@ -27,6 +27,7 @@
         <h1 align="center"> Wearables </h1><hr />
 
         <div id="buttonsDiv">
+            <button id="live" class="buttonDesign">Live D3 Charts</button>
             <button id="charts" class="buttonDesign">D3 Charts</button>
             <button id="gameTimer" class="buttonDesign">Game Timer</button>
             <button id="singlePlayer" class="buttonDesign">Single Player</button>

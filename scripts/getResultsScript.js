@@ -13,6 +13,10 @@ $(document).ready(function()
         window.location.href = '/charts.php';
     });
 
+    $("#live").click(function () {
+        window.location.href = '/live.php';
+    });
+
     $("#playTurn").click(function()
     {
         window.location.href = '/minesweeper/index_turn.php';
