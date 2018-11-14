@@ -10,11 +10,11 @@ $(document).ready(function()
 ####################################*/
 
     $("#charts").click(function() {
-        window.location.href = '/charts.php';
+        window.location.href = '/wearable_web/charts.php';
     });
 
     $("#live").click(function () {
-        window.location.href = '/live.php';
+        window.location.href = '/wearable_web/live.php';
     });
 
     $("#playTurn").click(function()

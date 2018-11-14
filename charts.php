@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/charts.css">
 
+    <script src="scripts/charts.js"></script>
     <script src="scripts/jquery.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="scripts/wearables-api.js"></script>
     <script src="scripts/multi-user-chart.js"></script>
     <script src="scripts/multi-signal-chart.js"></script>
-    <script src="scripts/charts.js"></script>
 </head>
 
 <body>
@@ -92,7 +92,7 @@
     </div>
 
     <div id="chart-container" style="display:none">
-        <h5 id="chart-title">No Game Selected</h3>
+        <h5 id="chart-title">No Game Selected</h5>
         <svg id="chart"></svg>
     </div>
 

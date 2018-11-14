@@ -22,7 +22,7 @@
 
 <body>
     <div id="nav">
-        <button id="home" class="button-primary"><a href="/index.php">Home</a></button>
+        <button id="home" class="button-primary"><a href="/wearable_web/index.php">Home</a></button>
     </div>
 
     <div class="container">
@@ -42,7 +42,7 @@
         <!-- <svg id="ba-chart"></svg> -->
         <svg id="chart"></svg>
         <hr>
-        <h5 id="chart-title">Live Multi-Signal</h3>
+        <h5 id="chart-title">Live Multi-Signal</h5>
         <svg id="player1-chart"></svg>
         <svg id="player2-chart"></svg>
         <svg id="player3-chart"></svg>
