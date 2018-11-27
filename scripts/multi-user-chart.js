@@ -1,3 +1,6 @@
+// All parameters type start and end time and date are sent from charts.js and used
+// here to build live and non-live charts -JT
+
 function buildMultiUserChart(type, start, end, data) {
     d3.select("#chart").selectAll("*").remove(); // Clear previous chart if any
     var m = {
@@ -7,6 +10,10 @@ function buildMultiUserChart(type, start, end, data) {
         bottom: 30
     };
 
+
+    //parseInt - parses a string and returns an integer.
+    //d3.select - d3 function that helps you select item. selecting chart-container index in charts.php adds
+    // width styling subtracting (2 * left margin) stored into w
     var w = parseInt(d3.select('#chart-container').style('width')) - 2 * m.left;
     var h = 600 - m.top - m.bottom;
 
@@ -16,10 +23,11 @@ function buildMultiUserChart(type, start, end, data) {
         .append("g")
         .attr("transform", "translate(" + m.left + "," + m.top + ")");
 
-    var minTime = start;
+    var minTime = start; // the dummy data passed from charts.js is stored in minTime and maxTime
     var maxTime = end;
 
     // Choose which chart to display for charts.php
+    // 'type' comes from charts.js - switch case line 252 - 257 - JT
     data = data[type];
 
     var minData = Number.POSITIVE_INFINITY;
@@ -31,6 +39,7 @@ function buildMultiUserChart(type, start, end, data) {
     }
 
     // Set axes
+    //All x and y values from the database that fall within the minTime and maxTime interval. -JT
     x = d3.scaleTime()
         .domain([minTime, maxTime])
         .range([0, w]);
@@ -38,16 +47,20 @@ function buildMultiUserChart(type, start, end, data) {
         .domain([minData, maxData + 2])
         .range([h, 0]);
 
+    //These are the tick mark labels on the x and y axis - JT
     xAxis = d3.axisBottom(x);
     yAxis = d3.axisLeft(y);
 
     // Zoom Function
+    // Problem: Scales the line graph instead of zooming into the (x,y) point
     var zoom = d3.zoom()
         .scaleExtent([1, 8])
         // .translateExtent([[0, 0], [w, h]])
         .on("zoom", zoomFunction);
 
     // Inner Drawing Space
+    // d.append("g") - this is used to group svg elements together -JT
+    //adds
     var innerSpace = chart.append("g")
         .attr("class", "inner_space")
         .attr("transform", "translate(" + m.left + "," + m.top + ")");
@@ -98,7 +111,7 @@ function buildMultiUserChart(type, start, end, data) {
         .style('fill', 'none');
 
     function zoomFunction(){
-        // Create new scale ojects based on event
+        // Create new scale objects based on event
         var new_xScale = d3.event.transform.rescaleX(x);
         var new_yScale = d3.event.transform.rescaleY(y);
 
@@ -148,6 +161,7 @@ function buildLiveMultiUserChart () {
         .x(function (d, i) { return x(now - (limit - 1 - i) * duration); })
         .y(function (d) { return y(d); }),
         path = chart.append('path');
+
     var player1 = d3.line().curve(d3.curveCardinal)
         .x(function (d) { return x(d.x); })
         .y(function (d) { return y(d.y); });

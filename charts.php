@@ -12,17 +12,17 @@
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/charts.css">
 
-    <script src="scripts/charts.js"></script>
     <script src="scripts/jquery.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="scripts/wearables-api.js"></script>
+    <script src="scripts/charts.js"></script>
     <script src="scripts/multi-user-chart.js"></script>
     <script src="scripts/multi-signal-chart.js"></script>
 </head>
 
 <body>
     <div id="nav">
-        <button class="button-primary"><a href="/index.php">Home</a></button>
+        <button class="button-primary"><a href="/wearable_web/index.php">Home</a></button>
     </div>
   
     <div class="container">

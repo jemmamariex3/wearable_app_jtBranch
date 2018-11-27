@@ -41,7 +41,6 @@ function getAllDataByTime(display, start, end, cb) {
         });
     });
 }
-
 // Transform dataX, dataY, dataZ into instantaneous acceleration data
 function acTransform(data) {
     // sqrt( (xn - xp)^2 + (yn-yp)^2 + (zn-zp)^2 )
@@ -214,7 +213,10 @@ $(function() {
 
             var chartTitle = $(this).parent().find(".session-name").text() + "<br>" + $(this).text();
             $("#chart-title").html(chartTitle);
-        
+
+            //start and end time are dummy values from the games array up top -JT
+            //These values are used as parameters to get data that falls in BETWEEN the start and end
+            //times: line 121-128 getPlayers.php --JT
             $('#chart-container').show();
             var key = $(this).attr('id');
             start = games[key][0];

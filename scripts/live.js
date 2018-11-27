@@ -1,4 +1,8 @@
 // TODO: Refactor Duplicate Code ----------------------------------------------
+// changed all callback functions to the get latest functions from wearables-api.js -JT
+// changed line 106 to buildLIVEMultiUserChart
+//The data collected from the cb (buildLiveMultiUserChart) is formatted in this function --JT
+
 function getAllDataByTime(display, start, end, cb) {
     var hr, gsr, skin, ac, ba;
 
@@ -27,6 +31,35 @@ function getAllDataByTime(display, start, end, cb) {
         });
     });
 }
+// function getAllDataByTime(display, start, end, cb) {
+//     var hr, gsr, skin, ac, ba;
+//
+//     //this is an object from wearables-api.js line 57 --JT
+//     wearables.getLatestGSR(start, end, function (data) {
+//         gsr = data;
+//         wearables.getLatestHR(start, end, function (data) {
+//             hr = data;
+//             wearables.getLatestSkin(start, end, function (data) {
+//                 skin = data;
+//                 wearables.getLatestAC(start, end, function (data) {
+//                     ac = acTransform(data);
+//                     wearables.getLatestBA(start, end, function (data) {
+//                         ba = data;
+//                         return cb(display, start, end,
+//                             {
+//                                 heartRate: hr,
+//                                 gsr: gsr,
+//                                 skin: skin,
+//                                 accelerometer: ac,
+//                                 breathAmp: ba
+//                             }
+//                         );
+//                     });
+//                 });
+//             });
+//         });
+//     });
+// }
 
 // Transform dataX, dataY, dataZ into instantaneous acceleration data
 function acTransform(data) {
@@ -98,7 +131,11 @@ $(function () {
         display = "breathAmp";
         
         // regenerate charts with non-live values
+        // takes the same data that is populating the non-live d3 charts and use it for the live chart
         getAllDataByTime(display, start, end, buildMultiUserChart);
+
+        //buildMultiUserChart is the cb that is passed into getAllDataByTime (up top) -JT
+        // getAllDataByTime(display, start, end, buildLiveMultiUserChart);
         // getAllDataByTime(display, start, end, buildMultiSignalChart);
 
         console.log("start: " + start + " end:" + end);
