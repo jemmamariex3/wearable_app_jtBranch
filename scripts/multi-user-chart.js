@@ -137,17 +137,24 @@ function buildLiveMultiUserChart () {
 
     // Set axes
     var x = d3.scaleTime()
-        .domain([now - (limit - 2), now - duration])
-        .range([(-m.left - m.right), w - m.left - m.right]),
+            .domain([now - (limit - 2), now - duration])
+            .range([(-m.left - m.right), w - m.left - m.right]),
         y = d3.scaleLinear()
-        .domain([0, max])
-        .range([h - m.bottom, 0]);
+                .domain([0, max]) // Accepts input form 0 to max
+                .range([h - m.bottom, 0]); // maps output from h - m.bottom to 0
+        // y(0) = h - m.bottom
+        // ...
+        // y(max) = 0
 
     // Set lines
-    var line = d3.line()
+
+    var line = d3.line() // D3’s line generator produces a path data string given an array of co-ordinates
+                         // lineGenerator is just a function that accepts an array of co-ordinates and outputs a path data string.
+
         .x(function (d, i) { return x(now - (limit - 1 - i) * duration); })
         .y(function (d) { return y(d); }),
         path = chart.append('path');
+
     var player1 = d3.line().curve(d3.curveCardinal)
         .x(function (d) { return x(d.x); })
         .y(function (d) { return y(d.y); });

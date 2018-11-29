@@ -29,7 +29,7 @@ function _formatResponseAC(data, cb) {
 }
 
 function _getDataByTime(func, start, end, cb) {
-    var url = "/test/wearable_web/php/getPlayers.php?func=" + func + "&start=" + start + "&end=" + end;
+    var url = "/wearable_web/php/getPlayers.php?func=" + func + "&start=" + start + "&end=" + end;
     $.ajax({
         url: url,
         success: function (data) { return _formatResponse(data, cb); }
@@ -37,7 +37,7 @@ function _getDataByTime(func, start, end, cb) {
 }
 
 function _getACDataByTime(func, start, end, cb) {
-    var url = "/test/wearable_web/php/getPlayers.php?func=" + func + "&start=" + start + "&end=" + end;
+    var url = "/wearable_web/php/getPlayers.php?func=" + func + "&start=" + start + "&end=" + end;
     $.ajax({
         url: url,
         success: function (data) { return _formatResponseAC(data, cb); }
@@ -46,11 +46,11 @@ function _getACDataByTime(func, start, end, cb) {
 
 
 function _getDataByLatest(func, player, cb) {
-    var url = "/test/wearable_web/php/getPlayers.php?func=" + func + "&player=" + player;
+    var url = "/wearable_web/php/getPlayers.php?func=" + func + "&player=" + player;
     $.ajax({
         async: false,
         url: url,
-        success: function (data) { return cb(data); }
+        success: function (data) { return cb(data); }``
     });
 }
 
