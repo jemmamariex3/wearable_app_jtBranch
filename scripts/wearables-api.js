@@ -73,8 +73,6 @@ var wearables = {
         _getDataByTime("allBATime", start, end, cb);
     },
 
-    // Question for renchie: I have assigned all the get latest functions from wearable-api.js to lines 9 - 33 in live.js. All the getLatest functions are also
-    //  calling _getDataByLatest. how do i see what data is coming out of these functions?
     getLatestHR: function (player, cb) {
         _getDataByLatest("hr", player, cb);
     },
