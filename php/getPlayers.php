@@ -21,7 +21,6 @@
       die("Connection failed: " . $conn->connect_error);
 
   }
-
   function disconnect()
   {
     global $conn;
