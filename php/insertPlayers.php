@@ -10,8 +10,8 @@
     global $conn;
     $servername = "localhost";
     $username = "dbuser";
-    $password = "dbroot";
-    $dbname = "wearable_app";
+    $password = "mysql";
+    $dbname = "wearable";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);

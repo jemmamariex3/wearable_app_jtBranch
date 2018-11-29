@@ -10,36 +10,36 @@ $(document).ready(function()
 ####################################*/
 
     $("#charts").click(function() {
-        window.location.href = '/wearable_web/charts.php';
+        window.location.href = '/test/wearable_web/charts.php';
     });
 
     $("#live").click(function () {
-        window.location.href = '/wearable_web/live.php';
+        window.location.href = '/test/wearable_web/live.php';
     });
 
     $("#playTurn").click(function()
     {
-        window.location.href = '/minesweeper/index_turn.php';
+        window.location.href = '/test/minesweeper/index_turn.php';
     });
 
     $("#play_p1_vs_p2").click(function()
     {
-        window.location.href = '/minesweeper/index_p1_vs_p2.php';
+        window.location.href = '/test/wearable_web/minesweeper/index_p1_vs_p2.php';
     });
 
     $("#play_p3_vs_p4").click(function()
     {
-        window.location.href = '/minesweeper/index_p3_vs_p4.php';
+        window.location.href = '/test/wearable_web/minesweeper/index_p3_vs_p4.php';
     });
 
     $("#play_p1_vs_p2_turn").click(function()
     {
-        window.location.href = '/minesweeper/index_p1_vs_p2_turn.php';
+        window.location.href = '/test/wearable_web/minesweeper/index_p1_vs_p2_turn.php';
     });
 
     $("#play_p3_vs_p4_turn").click(function()
     {
-        window.location.href = '/minesweeper/index_p3_vs_p4_turn.php';
+        window.location.href = '/test/wearable_web/minesweeper/index_p3_vs_p4_turn.php';
     });
 
     $("#singlePlayer").click(function()
@@ -115,7 +115,7 @@ $(document).ready(function()
     });
 
     $("#playbackButton").click(function () {
-        window.location.href = '/minesweeper/php/playerGsrPlayback.php';
+        window.location.href = '/test/wearable_web/minesweeper/php/playerGsrPlayback.php';
     });
 
 /*####################################
@@ -170,7 +170,7 @@ $(document).ready(function()
     {
       var playerHR = document.getElementById('results');
 
-      $.ajax({url: "/php/getPlayers.php?func=allHR",
+      $.ajax({url: "/test/wearable_web/php/getPlayers.php?func=allHR",
           success: function(result) {
               playerHR.innerHTML = result.join("");
           }  } );
@@ -180,7 +180,7 @@ $(document).ready(function()
     {
       var playerSkin = document.getElementById('results');
 
-      $.ajax({url: "/php/getPlayers.php?func=allSkin",
+      $.ajax({url: "/test/wearable_web/php/getPlayers.php?func=allSkin",
           success: function(result) {
               playerSkin.innerHTML = result.join("");
           }  } );
@@ -190,7 +190,7 @@ $(document).ready(function()
     {
       var playerGSR = document.getElementById('results');
 
-      $.ajax({url: "/php/getPlayers.php?func=allGSR",
+      $.ajax({url: "/test/wearable_web/php/getPlayers.php?func=allGSR",
           success: function(result) {
               playerGSR.innerHTML = result.join("");
           }  } );
@@ -204,7 +204,7 @@ $(document).ready(function()
     {
       var playerHR = document.getElementById('results' + resultsID);
 
-      $.ajax({url: "/php/getPlayers.php?func=hr&player=" + p,
+      $.ajax({url: "/test/wearable_web/php/getPlayers.php?func=hr&player=" + p,
           success: function(result) {
               playerHR.innerHTML = "-Heart Rate: " + result;
           }  } );
@@ -214,7 +214,7 @@ $(document).ready(function()
     {
       var playerSkin = document.getElementById('results' + resultsID);
 
-      $.ajax({url: "/php/getPlayers.php?func=skintemp&player=" + p,
+      $.ajax({url: "/test/wearable_web/php/getPlayers.php?func=skintemp&player=" + p,
           success: function(result) {
               playerSkin.innerHTML = "-Skin Temp: " + result;
           }  } );
@@ -224,7 +224,7 @@ $(document).ready(function()
     {
       var playerGSR = document.getElementById('results' + resultsID);
 
-      $.ajax({url: "/php/getPlayers.php?func=gsr&player=" + p,
+      $.ajax({url: "/test/wearable_web/php/getPlayers.php?func=gsr&player=" + p,
           success: function(result) {
               playerGSR.innerHTML = "-GSR: " + result;
           }  } );
