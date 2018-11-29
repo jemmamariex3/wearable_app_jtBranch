@@ -224,7 +224,7 @@ $(document).ready(function()
     {
       var playerGSR = document.getElementById('results' + resultsID);
 
-      $.ajax({url: "/test/wearable_web/php/getPlayers.php?func=gsr&player=" + p,
+      $.ajax({url: "/wearable_web/php/getPlayers.php?func=gsr&player=" + p,
           success: function(result) {
               playerGSR.innerHTML = "-GSR: " + result;
           }  } );

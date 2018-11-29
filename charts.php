@@ -22,7 +22,7 @@
 
 <body>
     <div id="nav">
-        <button class="button-primary"><a href="/test/wearable_web/index.php">Home</a></button>
+        <button class="button-primary"><a href="/wearable_web/index.php">Home</a></button>
     </div>
 
     <div class="container">
