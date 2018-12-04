@@ -92,7 +92,7 @@
     </div>
 
     <div id="chart-container" style="display:none">
-        <h5 id="chart-title">No Game Selected</h3>
+        <h5 id="chart-title">No Game Selected</h5>
         <svg id="chart"></svg>
     </div>
 

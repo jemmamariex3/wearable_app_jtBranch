@@ -14,10 +14,10 @@
 
     <script src="scripts/jquery.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="scripts/live.js"></script>
     <script src="scripts/wearables-api.js"></script>
     <script src="scripts/multi-user-chart.js"></script>
     <script src="scripts/multi-signal-chart.js"></script>
-    <script src="scripts/live.js"></script>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
         <!-- <svg id="ba-chart"></svg> -->
         <svg id="chart"></svg>
         <hr>
-        <h5 id="chart-title">Live Multi-Signal</h3>
+        <h5 id="chart-title">Live Multi-Signal</h5>
         <svg id="player1-chart"></svg>
         <svg id="player2-chart"></svg>
         <svg id="player3-chart"></svg>
